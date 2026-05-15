@@ -22,7 +22,7 @@ async function main() {
 
         console.log('4. กำลังบันทึกข้อมูลลง PostgreSQL...');
         // ส่งเฉพาะ Array statistics เข้าไปที่ฟังก์ชัน saveToDb
-        //await saveToDb(data.statistics, dateStr);
+        await saveToDb(data.statistics, dateStr);
 
         console.log('ทำงานเสร็จสมบูรณ์!');
     } catch (error: any) {

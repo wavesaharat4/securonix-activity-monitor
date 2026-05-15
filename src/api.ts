@@ -55,41 +55,41 @@ export async function getMetricsData(bearerToken: string): Promise<MetricsResult
     const endTime = endOfYesterday.getTime();
 
     const headers = {
-        'accept': '*/*',
-        'accept-language': 'en-US,en;q=0.9',
+        //'accept': '*/*',
+        //'accept-language': 'en-US,en;q=0.9',
         'aggregation': 'HOURLY',
         // ใช้ Bearer Token ที่ได้จากขั้นตอนที่ 2 มาใส่แทนที่ Token เดิมใน curl
         'authorization': `Bearer ${bearerToken}`,
 
         // Header พิเศษที่มีค่าว่าง
-        'datasources': '',
-        'ingesters': '',
+        //'datasources': '',
+        //'ingesters': '',
 
         'end-time': endTime,
         'start-time': startTime,
-        'limit': '5',
-        'order': 'TOP',
-        'origin': 'https://portal.securonix.net',
-        'priority': 'u=1, i',
-        'referer': 'https://portal.securonix.net/',
+        //'limit': '5',
+        //'order': 'TOP',
+        //'origin': 'https://portal.securonix.net',
+        //'priority': 'u=1, i',
+        //'referer': 'https://portal.securonix.net/',
 
         // Browser & Sec-Fetch Headers เพื่อให้ Gateway มองว่าเป็นเบราว์เซอร์
-        'sec-ch-ua': '"Chromium";v="148", "Google Chrome";v="148", "Not/A)Brand";v="99"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'same-site',
+        //'sec-ch-ua': '"Chromium";v="148", "Google Chrome";v="148", "Not/A)Brand";v="99"',
+        //'sec-ch-ua-mobile': '?0',
+        //'sec-ch-ua-platform': '"Windows"',
+        //'sec-fetch-dest': 'empty',
+        //'sec-fetch-mode': 'cors',
+        //'sec-fetch-site': 'same-site',
 
         // Tenant Info
         'sub-tenant': 'INET',
         'tenant': 'a3t7achi',
 
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36',
+        //'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36',
 
         // Securonix Specific Headers
-        'x-snx-module': 'Vm0weE5GbFdiRmRYYmxKV1YwZG9VMWxyVm5kVmJGcHlWV3RLVUZWVU1Eaz0=',
-        'x-subscriber-token': 'Vm0weE5GbFhSWGROVldSV1YwZG9WVmx0ZEhkVU1WcHlWMjVrVjJKR2JETlpWVlpQVm14S2MxTnNaRmRpUjJoMlZrZDRTMk14WkhOWGJGcFhUVEZHTTFac1kzaFNNRFZ6VjJ4V1UySkdXbGhXYlhSM1VsWmFjMVp0UmxSTlZYQjZWa2MxUzFsV1NuTlhiRkphWVRGd00xVXdXbUZUUjFKSFYyMTRVMkpJUWpaV01uUmhZekZhZEZOcldrOVdiV2hYV1d0YWQxbFdjRmhsUjBaWFRWaENSbFZYZUdGVWJGcFhWMVJDVjFaRmJ6Qldha1pyWTJzeFNXTkdTbWxTVkZadlZtMXdUMVV4U1hoalJtUlRWa2Q0VWxaV1VYZFBVVDA5',
+        //'x-snx-module': 'Vm0weE5GbFdiRmRYYmxKV1YwZG9VMWxyVm5kVmJGcHlWV3RLVUZWVU1Eaz0=',
+        //'x-subscriber-token': 'Vm0weE5GbFhSWGROVldSV1YwZG9WVmx0ZEhkVU1WcHlWMjVrVjJKR2JETlpWVlpQVm14S2MxTnNaRmRpUjJoMlZrZDRTMk14WkhOWGJGcFhUVEZHTTFac1kzaFNNRFZ6VjJ4V1UySkdXbGhXYlhSM1VsWmFjMVp0UmxSTlZYQjZWa2MxUzFsV1NuTlhiRkphWVRGd00xVXdXbUZUUjFKSFYyMTRVMkpJUWpaV01uUmhZekZhZEZOcldrOVdiV2hYV1d0YWQxbFdjRmhsUjBaWFRWaENSbFZYZUdGVWJGcFhWMVJDVjFaRmJ6Qldha1pyWTJzeFNXTkdTbWxTVkZadlZtMXdUMVV4U1hoalJtUlRWa2Q0VWxaV1VYZFBVVDA5',
 
         // ใช้ UUID ใหม่แทนค่าคงที่ หรือจะใช้ค่าเดิมไปก่อนเพื่อทดสอบก็ได้ (แนะนำให้ใช้ uuid ใหม่)
         'x-transaction-id': '0ca7d735197d88'

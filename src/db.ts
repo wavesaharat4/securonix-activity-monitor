@@ -15,14 +15,16 @@ export async function saveToDb(statisticsData: StatisticItem[], recortDate: stri
         await client.connect();
         console.log('🔗 เชื่อมต่อฐานข้อมูลสำเร็จ');
 
-        const insertQuery = `
+       const insertQuery = `
             INSERT INTO securonix_statistics (data_source, ingester, events_count, record_date)
             VALUES ($1, $2, $3, $4)
+            ON CONFLICT (data_source, ingester, record_date) DO NOTHING
+            
         `;
 
-        let insertedCount = 0;
+       let insertedCount = 0;
+        let skippedCount = 0;
 
-        // วนลูปเฉพาะข้อมูลใน array "statistics"
         for (const item of statisticsData) {
             const values = [
                 item.data_source,
@@ -30,12 +32,21 @@ export async function saveToDb(statisticsData: StatisticItem[], recortDate: stri
                 item.events_count,
                 recortDate
             ];
-
-            await client.query(insertQuery, values);
-            insertedCount++;
+            
+            const result = await client.query(insertQuery, values);
+            
+            // ถ้า INSERT สำเร็จ (ไม่ใช่ข้อมูลซ้ำ) PostgreSQL จะคืนค่า rowCount = 1
+            if (result.rowCount === 1) {
+                insertedCount++;
+            } else {
+                // ถ้าข้อมูลซ้ำ มันจะ DO NOTHING ทำให้ rowCount = 0
+                skippedCount++;
+            }
         }
 
-        console.log(`✅ บันทึกข้อมูลสำเร็จจำนวน ${insertedCount} รายการ`);
+        console.log(`✅ สรุปการทำงานสำหรับวันที่ ${recortDate}:`);
+        console.log(`   - บันทึกข้อมูลใหม่: ${insertedCount} รายการ`);
+        console.log(`   - ข้ามข้อมูลที่ซ้ำกัน: ${skippedCount} รายการ`);
 
     } catch (error) {
         if (error instanceof Error) {
